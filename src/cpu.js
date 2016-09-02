@@ -55,6 +55,32 @@ const imp = {
     throw 'Not implemented yet';
   },
 
+  DEC_reg: function (mem, reg) { //0x05
+    /*
+      Decrement register
+      Flags affected:
+        Z - Set if result is zero.
+        N - Set.
+        H - Set if no borrow from bit 4.
+        C - Not affected.
+    */
+    if (mem.r[reg] == 1) {
+      mem.setFlag('Z', true);
+    } else {
+      mem.setFlag('Z', false);
+    }
+
+    if ((mem.r[reg] & 0b00001111) > 1) {
+      mem.setFlag('H', true);
+    } else {
+      mem.setFlag('H', false);
+    }
+
+    mem.setFlag('N', true);
+
+    mem.r[reg] = (mem.r[reg] - 1) & 0x00FF;
+  },
+
   LD_REG_nn: function (mem, reg, nn) { // 0x21, ...
     /*
     Move nn (16bits) into register reg
@@ -166,6 +192,14 @@ const imp = {
 };
 
 const opcodes = {
+  '0x05': {
+    original: 'DEC B',
+    fn: 'DEC_reg',
+    register: 'B',
+    flags: 'Z1H',
+    cycles: 4,
+    PC: 1,
+  },
   '0x06': {
     original: 'LD B,d8',
     fn: 'LD_REG_n',
