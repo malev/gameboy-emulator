@@ -1,0 +1,26 @@
+{
+  "name": "gameboy-js",
+  "version": "1.0.0",
+  "description": "GameBoy Emulator in your browser",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server --inline --hot --progress --content-base public --port 3333",
+    "build": "./node_modules/.bin/webpack",
+    "deploy": "./node_modules/.bin/webpack && surge public"
+  },
+  "keywords": [],
+  "author": "Marcos Vanetta <marcosvanetta@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "sprintf-js": "^1.0.3",
+    "webpack": "1.13.1",
+    "webpack-dev-server": "^1.15.1"
+  },
+  "devDependencies": {
+    "babel-core": "6.10.4",
+    "babel-loader": "6.2.4",
+    "babel-plugin-transform-react-jsx": "6.8.0",
+    "babel-preset-es2015": "6.9.0"
+  }
+}
