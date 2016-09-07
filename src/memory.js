@@ -116,4 +116,17 @@ exports.Memory = class Memory {
     /* returns 16bit integer */
     return this.data[addr] | (this.data[addr + 1] << 8);
   }
+
+  reset() {
+    this.r.A = 0;
+    this.r.F = 0;
+    this.r.B = 0;
+    this.r.C = 0;
+    this.r.D = 0;
+    this.r.E = 0;
+    this.r.H = 0;
+    this.r.L = 0;
+    this.r.SP = 0;
+    this.r.PC = 0;
+  }
 };
