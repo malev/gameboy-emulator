@@ -18,18 +18,55 @@
         float: left;
         margin: 7px;
       }
+      .instruction, .register {
+        font-family: monospace;
+      }
+      .current {
+        border: 1px solid red;
+      }
+      .pre {
+        overflow: auto;
+        width: 500px;                          /* specify width  */
+        white-space: pre-wrap;                 /* CSS3 browsers  */
+        white-space: -moz-pre-wrap !important; /* 1999+ Mozilla  */
+        white-space: -pre-wrap;                /* Opera 4 thru 6 */
+        white-space: -o-pre-wrap;              /* Opera 7 and up */
+        word-wrap: break-word;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
           <h2>Rom</h2>
-          <div class="" id="rom"></div>
+          <div id="instructions"></div>
         </div>
-        <div class="col-md-4">
-          <h2>Steps</h2>
-          <pre class="" id="steps"></pre>
+        <div class="col-md-6">
+          <h2>Registers & Flags</h2>
+          <div class="row">
+            <div class="registers col-sm-6" id="registers">Registers</div>
+            <div class="flags col-sm-6" id="flags">Flags</div>
+          </div>
+          <h2>Controls</h2>
+          <div class="">
+            <div class="btn-group" role="group" aria-label="...">
+              <form class="form-inline" id="controls">
+                <input type="text" class="form-control" id="n-steps" value="24900">
+                <button type="button" class="btn btn-default" id="start">
+                  Start
+                </button>
+                <button type="button" class="btn btn-default" id="stop">
+                  Stop
+                </button>
+                <button type="button" class="btn btn-default" id="next">
+                  Next
+                </button>
+              </div>
+            </form>
+            <h2></h2>
+            <pre class="" id="steps"></pre>
+          </div>
         </div>
       </div>
     </div>
