@@ -1,5 +1,6 @@
 let imp = require('../src/imp').imp;
 let helpers = imp.helpers;
+const Memory = require('../src/memory').Memory;
 
 describe('helpers', function () {
   it('says hello', function (done) {
@@ -83,5 +84,28 @@ describe('helpers', function () {
       expect(flags).toEqual([true, false, false, false]);
       done();
     });
+  });
+
+  describe('CP_n', function () {
+    it('A: 1, n: 1', function (done) {
+      mem = new Memory([]);
+      mem.r.A = 1;
+
+      imp.CP_n(mem, 1);
+
+      expect(mem.r.F).toEqual(0b11000000);
+      done();
+    });
+
+    // it('A: 3, n: 2', function (done) {
+    //   mem = new Memory([]);
+    //   mem.r.A = 3;
+    //
+    //   imp.CP_n(mem, 2);
+    //
+    //   console.log(mem.r.F);
+    //   expect(mem.r.F).toEqual(0b00010000);
+    //   done();
+    // });
   });
 });

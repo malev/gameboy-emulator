@@ -1,17 +1,19 @@
 {
-  "name": "gameboy-js",
+  "name": "gameboy-emulator",
   "version": "1.0.0",
   "description": "GameBoy Emulator in your browser",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --inline --hot --progress --content-base public --port 3333",
     "build": "./node_modules/.bin/webpack",
-    "deploy": "./node_modules/.bin/webpack && surge public"
+    "deploy": "./node_modules/.bin/webpack && surge public",
+    "test": "./node_modules/.bin/jasmine-node spec"
   },
   "keywords": [],
   "author": "Marcos Vanetta <marcosvanetta@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "jasmine-node": "^1.14.5",
     "jquery": "^3.1.0",
     "sprintf-js": "^1.0.3",
     "webpack": "1.13.1",
