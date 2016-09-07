@@ -451,6 +451,45 @@ const imp = {
     }
   },
 
+  JP_HL: function (mem, n) {
+    /*
+    JP [HL] - Jump to address contained in HL.
+    Flags affected: None
+    */
+    throw 'JP_HL not implemented yet';
+  },
+
+  JR_n: function (mem, n) {
+    /*
+      JR n - Add n to current address and jump to it.
+      n = one byte signed immediate value.
+      Flags affected: None
+    */
+    throw 'JR_n not implemented yet';
+  },
+
+  JR_cc_n: function (mem, n) {
+    /*
+      JR cc,n       - If following condition is true then
+      add n to current address and jump to it:
+      n = one byte signed immediate value
+      cc = NZ, Jump if Z flag is reset.
+      cc = Z,  Jump if Z flag is set.
+      cc = NC, Jump if C flag is reset.
+      cc = C,  Jump if C flag is set.
+      Flags affected: None
+    */
+    throw 'JR_cc_n not implemented yet';
+  },
+
+  HALT: function (mem, n) {
+    /*
+      HALT - Power down CPU until an interrupt occurs.
+      Flags affected: None
+    */
+    throw 'HALT not implemented yet';
+  },
+
   LD_A_n: function (mem, n) {
     /*
       LD A,n - Put value n into A.
@@ -472,6 +511,7 @@ const imp = {
       Flags affected: None
     */
     if (['BC', 'DE', 'HL'].indexOf(n) >= 0) {
+      throw 'Check this one';
       mem.writeByteAt(mem.r[n], mem.r.A);
     } else if (['A', 'B', 'C', 'D', 'E', 'H', 'L'].indexOf(n) >= 0) {
       mem.r[n] = mem.r.A;
@@ -774,6 +814,88 @@ const imp = {
     mem.r.setFlag('F', mem.r.A == 0);
   },
 
+  RLC_n: function (mem, n) {
+    /*
+      RLC n - Rotate n left. Old bit 7 to Carry flag.
+      n = A,B,C,D,E,H,L,(HL)
+      Flags affected:
+      Z - Set if result is zero.
+      N - Reset.
+      H - Reset.
+      C - Contains old bit 7 data.
+    */
+    throw 'RLC_n not implemented yet';
+  },
+
+  RR_n: function (mem, n) {
+    /*
+      RR n - Rotate n right through Carry flag.
+      n = A,B,C,D,E,H,L,(HL)
+      Flags affected:
+      Z - Set if result is zero.
+      N - Reset.
+      H - Reset.
+      C - Contains old bit 0 data.
+    */
+    throw 'RR_n not implemented yet';
+  },
+
+  RRC_n: function (mem, n) {
+    /*
+      RRC n - Rotate n right. Old bit 0 to Carry flag.
+      n = A,B,C,D,E,H,L,(HL)
+      Flags affected:
+      Z - Set if result is zero.
+      N - Reset.
+      H - Reset.
+      C - Contains old bit 0 data.
+    */
+    throw 'RRC_n not implemented yet';
+  },
+
+  RST_n: function (mem, n) {
+    /*
+      RST n - Push present address onto stack.
+      Jump to address $0000 + n.
+      n = $00,$08,$10,$18,$20,$28,$30,$38
+      Flags affected: None
+    */
+    throw 'RST_n not implemented yet';
+  },
+
+  SBC_A_n: function (mem, n) {
+    /*
+      SBC A,n - Subtract n + Carry flag from A.
+      n = A,B,C,D,E,H,L,(HL),#
+      Flags affected:
+      N - Set.
+      H - Set if no borrow from bit 4.
+      C - Set if no borrow.
+    */
+    throw 'SBC_A_n not implemented yet';
+  },
+
+  SCF: function (mem, n) {
+    /*
+      SCF - Set Carry flag.
+      Flags affected:
+      Z - Not affected.
+      N - Reset.
+      H - Reset.
+      C - Set.
+    */
+    throw 'SCF not implemented yet';
+  },
+
+  SET_b_n: function (mem, n) {
+    /*
+      SET b,r       - Set bit b in register r.
+      b = 0-7, r = A,B,C,D,E,H,L,(HL)
+      Flags affected: None
+    */
+    throw 'SET_b_n not implemented yet';
+  },
+
   SUB_n: function (mem, n) {
     /*
       SUB n - Subtract n from A.
@@ -783,6 +905,65 @@ const imp = {
         N - Set.
         H - Set if no borrow from bit 4.
         C - Set if no borrow.
+    */
+    throw 'SUB_n not implemented yet';
+  },
+
+  SLA_n: function (mem, n) {
+    /*
+      SLA n - Shift n left into Carry. LSBit of n set to 0.
+      n = A,B,C,D,E,H,L,(HL)
+      Flags affected:
+      Z - Set if result is zero.
+      N - Reset.
+      H - Reset.
+      C - Contains old bit 7 data.
+    */
+    throw 'SLA_n not implemented yet';
+  },
+
+  SRA_n: function (mem, n) {
+    /*
+      SRA n         - Shift n right into Carry. MSBit doesn't change.
+      n = A,B,C,D,E,H,L,(HL)
+      Flags affected:
+      Z - Set if result is zero.
+      N - Reset.
+      H - Reset.
+      C - Contains old bit 0 data.
+    */
+    throw 'SRA_n not implemented yet';
+  },
+
+  SRL_n: function (mem, n) {
+    /*
+      SRL n - Shift n right into Carry. MSBit of n set to 0.
+      n = A,B,C,D,E,H,L,(HL)
+      Flags affected:
+      Z - Set if result is zero.
+      N - Reset.
+      H - Reset.
+      C - Contains old bit 0 data.
+    */
+    throw 'SRL_n not implemented yet';
+  },
+
+  STOP: function (mem, n) {
+    /*
+      STOP - ???
+    */
+    throw 'STOP not implemented yet';
+  },
+
+  SUB_n: function (mem, n) {
+    /*
+      SUB n         - Subtract n from A.
+      n = A,B,C,D,E,H,L,(HL),#
+      Flags affected:
+      Z - Set if result is zero.
+      N - Set.
+      H - Set if no borrow from bit 4.
+      C - Set if no borrow.
     */
     throw 'SUB_n not implemented yet';
   },
@@ -798,12 +979,6 @@ const imp = {
         C - Reset.
     */
     throw 'SWAP_n not implemented yet';
-  },
-
-  GENERIC_n: function (mem, n) {
-    /*
-    */
-    throw 'GENERIC_n not implemented yet';
   },
 
   XOR_n: function (mem, n) {
