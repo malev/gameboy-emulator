@@ -74,6 +74,10 @@ class Registers {
 
     return this.F;
   }
+
+  resetFlags() {
+    this.F = this.F & 0b00001111;
+  }
 };
 
 exports.Memory = class Memory {
@@ -105,12 +109,6 @@ exports.Memory = class Memory {
 
   getByteAt(addr=0) {
     /* returns 8bit integer */
-    if (addr == 0xFF0F) {
-      console.log('byte read from interrupt flag (IF)');
-    } else if (addr == 0xFF44) {
-      console.log('byte read from LY');
-    }  // TODO: remove this debug messages
-
     return this.data[addr];
   }
 
