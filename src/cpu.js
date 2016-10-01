@@ -74,8 +74,15 @@ exports.CPU = class CPU {
 
     let temp = this.getInstructionWithArguments();
     let instruction = temp[0];
+    let args = temp[1];
+
     instruction.address = this.mem.r.PC;
-    // let args = temp[1];
+
+    if (typeof args[0] == 'number') {
+      instruction.argument = args[0];
+    } else if (typeof args[1] == 'number') {
+      instruction.argument = args[1];
+    }
 
     if (instruction.PC === 0) {
       this.mem.r.PC += 1;
