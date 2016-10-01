@@ -93,6 +93,10 @@ exports.CPU = class CPU {
     return instruction;
   }
 
+  reset () {
+    this.mem.reset();
+  }
+
   exec () {
     let temp = this.getInstructionWithArguments();
     let instruction = temp[0];

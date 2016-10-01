@@ -115,3 +115,8 @@ $('#next').on('click', function (event) {
     $('#steps').append(cmd);
   }
 });
+
+$('#reset').on('click', (event) => {
+  cpu.reset();
+  drawRegisters(mem);
+});
