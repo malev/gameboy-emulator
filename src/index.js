@@ -26,16 +26,16 @@ let drawRegisters = function (mem) {
 };
 
 let drawInstruction = function (instr) {
-  let content = `0x${sprintf('%02X', instr.address)}`;
-  if (instr.cb) {
-    content += ` | [cb] <b>${instr.original}</b> <i>(0x${sprintf('%02X', instr.opcode)})</i>`;
-  } else {
-    content += ` | <b>${instr.original}</b> <i>(0x${sprintf('%02X', instr.opcode)})</i>`;
+  let content = [];
+
+  content.push(`0x${sprintf('%02X', instr.address)}`);
+  content.push(`| <b>${instr.original}</b>`);
+  if (instr.argument) {
+    content.push(` (0x${sprintf('%04X', instr.argument)})`);
   }
 
-  if (instr.argument) {
-    content += ` | 0x${sprintf('%04X', instr.argument)}`;
-  }
+  content.push(`| <i>${sprintf('%02X', instr.opcode)}</i>`);
+  content = content.join(' ');
 
   $('#instructions').append(`<div class="instruction" id="pos_${instr.address}">${content}</div>`);
 };
@@ -114,4 +114,9 @@ $('#next').on('click', function (event) {
   for (let cmd of commands) {
     $('#steps').append(cmd);
   }
+});
+
+$('#reset').on('click', (event) => {
+  cpu.reset();
+  drawRegisters(mem);
 });
