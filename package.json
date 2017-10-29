@@ -4,16 +4,16 @@
   "description": "GameBoy Emulator in your browser",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --inline --hot --progress --content-base public --port 3333",
-    "build": "./node_modules/.bin/webpack",
-    "deploy": "./node_modules/.bin/webpack && surge public",
-    "test": "./node_modules/.bin/jasmine-node spec"
+    "start": "webpack-dev-server --inline --hot --progress --content-base public --port 3333",
+    "build": "webpack",
+    "deploy": "webpack && surge public",
+    "test": "mocha ./spec",
+    "tdd": "mocha ./spec -w"
   },
   "keywords": [],
   "author": "Marcos Vanetta <marcosvanetta@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "jasmine-node": "^1.14.5",
     "jquery": "^3.1.0",
     "sprintf-js": "^1.0.3",
     "webpack": "1.13.1",
@@ -23,6 +23,8 @@
     "babel-core": "6.10.4",
     "babel-loader": "6.2.4",
     "babel-plugin-transform-react-jsx": "6.8.0",
-    "babel-preset-es2015": "6.9.0"
+    "babel-preset-es2015": "6.9.0",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
   }
 }
